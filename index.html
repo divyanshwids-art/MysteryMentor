@@ -880,13 +880,12 @@
       flex-direction: column;
       background-color: rgba(91, 91, 163, 0.75);
       background-image:
-        linear-gradient(170deg, rgba(8, 12, 28, 0.52) 0%, rgba(6, 9, 24, 0.88) 62%, rgba(5, 7, 18, 0.94) 100%),
+        linear-gradient(170deg, rgba(8, 12, 28, 0.58) 0%, rgba(6, 9, 24, 0.88) 62%, rgba(5, 7, 18, 0.95) 100%),
         var(--card-image, none);
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(18px);
       box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
       padding: 34px 28px 28px;
       --rx: 0deg;
@@ -897,12 +896,17 @@
       --glare: 0;
       opacity: 0;
       transform: perspective(1000px) translateY(56px) scale(0.92) rotateX(var(--rx)) rotateY(var(--ry));
+      transform-style: preserve-3d;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      backface-visibility: hidden;
       transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, opacity 0.7s ease, border-color 0.4s ease;
     }
 
     .prob-card.in-view {
       opacity: 1;
-      transform: perspective(1000px) translateY(0) scale(var(--ts)) rotateX(var(--rx)) rotateY(var(--ry))
+      transform: perspective(1000px) translateY(0) scale(var(--ts)) rotateX(var(--rx)) rotateY(var(--ry));
     }
 
     .prob-card.tilting {
@@ -985,22 +989,30 @@
     /* Body content */
     .prob-card-body {
       position: relative;
-      z-index: 1;
+      z-index: 5;
       flex: 1;
+      transform: translateZ(24px);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     .prob-card h3 {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
       color: #ffffff;
       line-height: 1.35;
-      margin-bottom: 10px
+      margin-bottom: 10px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 2px 8px rgba(0, 0, 0, 0.7);
+      -webkit-font-smoothing: antialiased;
     }
 
     .prob-card p {
-      font-size: 13.5px;
-      color: rgba(200, 205, 230, 0.7);
-      line-height: 1.65
+      font-size: 14px;
+      color: #ffffff !important;
+      font-weight: 400;
+      line-height: 1.65;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 2px 8px rgba(0, 0, 0, 0.7);
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Arrow button, bottom-right */
@@ -1071,11 +1083,16 @@
 
     @media(max-width:768px) {
       .problem-cards {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
+      }
+
+      .prob-card,
+      .prob-card.in-view {
+        transform: none !important;
       }
 
       .prob-card.featured {
-        min-height: 340px
+        min-height: 340px;
       }
     }
 
@@ -2463,8 +2480,8 @@
 
     .footer-top {
       display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 48px;
+      grid-template-columns: 1.3fr 1.25fr 1.05fr 0.9fr;
+      gap: 40px;
       margin-bottom: 48px
     }
 
@@ -2789,35 +2806,75 @@
       background: #486abd;
     }
 
+    .mm-nav-mobile-cta {
+      display: none !important;
+    }
+
     @media(max-width:900px) {
+      nav.mm-nav {
+        overflow: visible !important;
+      }
+
       .mm-nav-links {
         display: none;
         position: fixed;
         top: 68px;
         left: 0;
         right: 0;
-        background: rgba(66, 66, 166, .98);
-        backdrop-filter: blur(20px);
+        width: 100vw;
+        background: #1e1e4a !important;
         flex-direction: column;
         align-items: stretch;
         justify-content: flex-start;
         gap: 0;
-        padding: 8px 0 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, .08);
-        z-index: 1999;
+        padding: 8px 0 20px;
+        border-bottom: 2px solid rgba(56, 189, 248, 0.4);
+        z-index: 999999 !important;
         max-height: calc(100vh - 68px);
-        overflow-y: auto;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
       }
 
       .mm-nav-links.mm-open {
-        display: flex;
+        display: flex !important;
       }
 
-      .mm-nav-links a {
-        padding: 14px 24px;
-        border-radius: 0;
-        font-size: 15px;
-        border-bottom: 1px solid rgba(255, 255, 255, .04);
+      .mm-nav .mm-nav-links a {
+        display: block !important;
+        padding: 13px 24px !important;
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        background: transparent;
+      }
+
+      .mm-nav .mm-nav-links a:hover,
+      .mm-nav .mm-nav-links a:active {
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: #38bdf8 !important;
+      }
+
+      .mm-nav .mm-nav-links a.mm-active {
+        color: #38bdf8 !important;
+        font-weight: 600 !important;
+        background: rgba(56, 189, 248, 0.12) !important;
+      }
+
+      .mm-nav-mobile-cta {
+        display: block !important;
+        margin: 14px 20px 6px !important;
+        padding: 12px 20px !important;
+        background: #2563eb !important;
+        color: #ffffff !important;
+        text-align: center !important;
+        font-weight: 600 !important;
+        font-size: 15px !important;
+        border-radius: 8px !important;
+        text-decoration: none !important;
+        border-bottom: none !important;
       }
 
       .mm-nav-cta {
@@ -2929,22 +2986,36 @@
         max-width: 100vw !important;
         width: 100% !important;
       }
-      section, footer, header, nav, main {
+      section, footer, header, main {
         max-width: 100vw !important;
         overflow-x: hidden;
+      }
+      nav.mm-nav {
+        overflow: visible !important;
       }
 
       /* 2. Hero title: Line 1 'Transform Sales Conversations', Line 2 'Into Actionable Intelligence' */
       .hero-main-title {
-        font-size: clamp(1.05rem, 4.9vw, 1.6rem) !important;
-        line-height: 1.28 !important;
+        font-size: clamp(1.35rem, 6vw, 1.8rem) !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.025em !important;
         margin-bottom: 16px !important;
       }
-      .hero-main-title .hero-title-line1,
-      .hero-main-title .hero-title-line2 {
-        display: inline-block !important;
+      .hero-title-br {
+        display: none !important;
+      }
+      .hero-main-title .hero-title-line1 {
+        display: block !important;
         white-space: nowrap !important;
-        max-width: 100% !important;
+        width: 100% !important;
+        margin-bottom: 4px !important;
+        text-align: inherit !important;
+      }
+      .hero-main-title .hero-title-line2 {
+        display: block !important;
+        white-space: nowrap !important;
+        width: 100% !important;
+        text-align: inherit !important;
       }
 
       /* 3. 5-Step AI Pipeline continuous floating cards ticker (right to left, pause on hover/touch) */
@@ -3061,26 +3132,27 @@
       }
 
       #contact {
-        padding: 48px 5% 24px;
+        padding: 48px 5% 28px;
       }
 
       #contact .footer-top {
-        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-        gap: 28px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
         margin-bottom: 32px;
       }
 
       #contact .footer-brand,
+      #contact .footer-col,
       #contact .footer-cta-col {
-        grid-column: 1 / -1;
-        text-align: center;
-      }
-
-      #contact .footer-brand {
+        width: 100%;
         text-align: left;
       }
 
       #contact .footer-brand .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         width: max-content !important;
         max-width: 100%;
         margin: 0;
@@ -3091,37 +3163,84 @@
       }
 
       #contact .footer-brand p {
-        max-width: 280px;
+        max-width: 100%;
         margin: 12px 0 0;
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: #c7cadb;
+        text-align: left;
       }
 
-      #contact .footer-top > .footer-col:nth-of-type(3) {
-        padding-left: 6px;
+      #contact .footer-col h4,
+      #contact .footer-cta-col h4 {
+        margin-bottom: 14px;
+        color: #e2e8f0;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-align: left;
       }
 
-      #contact .footer-col {
-        min-width: 0;
+      #contact .footer-col a {
+        display: block;
+        margin-bottom: 11px;
+        color: #c7cadb;
+        font-size: 14px;
+        line-height: 1.5;
+        text-decoration: none;
+        transition: color 0.2s;
+        text-align: left;
+      }
+
+      #contact .footer-col a:hover {
+        color: #ffffff;
+      }
+
+      #contact .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 12px;
+        color: #c7cadb;
+        font-size: 13.5px;
+        line-height: 1.5;
+        text-align: left;
+      }
+
+      #contact .contact-item svg {
+        width: 16px;
+        height: 16px;
+        margin-top: 3px;
+        flex-shrink: 0;
+        fill: none;
+        stroke: #c7cadb;
+        stroke-width: 1.8;
       }
 
       #contact .contact-item a {
-        overflow-wrap: anywhere;
+        color: inherit;
+        text-decoration: none;
+        font-size: 13.5px;
       }
 
       #contact .contact-item a[href^="mailto:"] {
-        font-size: 11px;
+        font-size: 13.5px;
         white-space: nowrap;
       }
 
       #contact .contact-item:has(a[href^="tel:"]) {
         display: grid;
         grid-template-columns: 16px minmax(0, 1fr);
-        column-gap: 8px;
+        column-gap: 10px;
+        row-gap: 4px;
       }
 
       #contact .contact-item:has(a[href^="tel:"]) svg {
         grid-column: 1;
         grid-row: 1 / span 2;
         align-self: center;
+        transform: translateY(2px);
       }
 
       #contact .contact-item:has(a[href^="tel:"]) br {
@@ -3132,8 +3251,30 @@
         grid-column: 2;
       }
 
-      #contact .footer-cta-col h4 {
-        margin-bottom: 12px !important;
+      #contact .footer-cta-col p {
+        margin-bottom: 14px;
+        color: #c7cadb;
+        font-size: 14px;
+        line-height: 1.6;
+        text-align: left;
+      }
+
+      #contact .footer-demo-btn {
+        display: inline-block;
+        padding: 11px 24px;
+        border-radius: 8px;
+        background: #2563eb;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+        text-align: center;
+      }
+
+      #contact .footer-bottom {
+        padding-top: 24px;
+        text-align: left;
       }
     }
 
@@ -3573,7 +3714,7 @@
         <a href="./pricing_page.html">Pricing</a>
         <a href="#faq">FAQ</a>
         <a href="./about_page.html">About</a>
-        <a href="./contact_page.html">Contact</a>
+        <a href="./contact_page.html" class="mm-nav-mobile-cta">Request Demo →</a>
       </div>
       <a href="./contact_page.html" class="mm-nav-cta">Request Demo</a>
       <button class="mm-hamburger" id="mm-hamburger" aria-label="Toggle navigation">
@@ -3729,7 +3870,7 @@
               style="border-top:1px solid rgba(255,255,255,0.07);padding-top:16px;display:flex;justify-content:space-between;align-items:center;">
               <div>
                 <div style="font-size:22px;font-weight:700;color:#00ddff;text-shadow:0 0 16px rgba(34,211,238,0.8);">
-                  +340%</div>
+                  +70%</div>
                 <div style="font-size:14px;color:#ffffff;margin-top:4px;">Sales Growth</div>
               </div>
               <div style="text-align:center;">
@@ -3798,7 +3939,7 @@
 
           <div class="prob-card-body" style="margin-top: 60%;">
             <h3>Inconsistent Sales Communication</h3>
-            <p style="color:#eae3e3;">Different reps use different approaches leading to unpredictable customer outcomes and brand
+            <p>Different reps use different approaches leading to unpredictable customer outcomes and brand
               inconsistency.</p>
           </div>
           <a href="./features_page.html" class="prob-arrow-btn"><span class="visually-hidden">Learn more about speech analytics</span><svg viewBox="0 0 24 24">
@@ -3812,7 +3953,7 @@
 
           <div class="prob-card-body" style="margin-top: 60%;">
             <h3>Manual Monitoring Doesn't Scale</h3>
-            <p style="color:#eae3e3;">Supervisors can only review a fraction of calls, leaving critical quality gaps undetected.</p>
+            <p>Supervisors can only review a fraction of calls, leaving critical quality gaps undetected.</p>
           </div>
           <a href="./platform_page.html" class="prob-arrow-btn"><span class="visually-hidden">Learn more about automated QA</span><svg viewBox="0 0 24 24">
               <line x1="5" y1="12" x2="19" y2="12" />
@@ -3825,7 +3966,7 @@
 
           <div class="prob-card-body" style="margin-top: 60%;">
             <h3>Lack of Measurable Sales Quality</h3>
-            <p style="color:#eae3e3;">Without objective scoring, it's impossible to benchmark and improve sales performance systematically.</p>
+            <p>Without objective scoring, it's impossible to benchmark and improve sales performance systematically.</p>
           </div>
           <a href="./features_page.html" class="prob-arrow-btn"><span class="visually-hidden">Learn more about sales quality scoring</span><svg viewBox="0 0 24 24">
               <line x1="5" y1="12" x2="19" y2="12" />
@@ -4560,44 +4701,7 @@
       </div>
 
       <!-- Testimonials / Expert Quotes Grid -->
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">“MysteryMentor gave our QA team 100% visibility into rep conversations across 4 regions. Our SOP adherence jumped from 58% to 91% in the first quarter, driving a 28% increase in closed-won conversion rates.”</p>
-          <div class="testi-author">
-            <div class="testi-avatar">VM</div>
-            <div>
-              <div class="testi-name">Vikram Mehta</div>
-              <div class="testi-role">VP of Revenue Enablement, Apex Enterprise Solutions</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">“Before MysteryMentor, manual call audits were delayed by two weeks. Now reps receive instant coaching notes after every call. It cut our onboarding ramp time in half.”</p>
-          <div class="testi-author">
-            <div class="testi-avatar">SJ</div>
-            <div>
-              <div class="testi-name">Sarah Jenkins</div>
-              <div class="testi-role">Global Sales Director, CloudScale B2B</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">“Automated speech-to-text combined with custom SOP scoring allowed us to standardize customer messaging across 120+ sales reps with zero manual supervision overhead.”</p>
-          <div class="testi-author">
-            <div class="testi-avatar">RS</div>
-            <div>
-              <div class="testi-name">Rajesh Sharma</div>
-              <div class="testi-role">Chief Commercial Officer, FinTech Corp</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      
       <!-- External Entity Alignment / Category Badges Strip -->
       <div class="entity-badges-strip">
         <div class="entity-badge-item">
@@ -4696,8 +4800,7 @@
           <p>Join forward-thinking companies using AI to transform their sales training and quality assurance.</p>
         </div>
         <div class="cta-btns">
-          <a href="./contact_page.html" class="cta-btn-white">Request Demo →</a>
-          <a href="./contact_page.html" class="cta-btn-outline">Contact Sales</a>
+          <a href="./contact_page.html" class="cta-btn-white">Request Demo</a>
         </div>
       </div>
     </div>
@@ -4719,14 +4822,13 @@
         </div>
         <div class="footer-col">
           <h4>Platform &amp; Solutions</h4>
-          <a href="./platform_page.html">AI Sales Intelligence Platform</a>
-          <a href="./features_page.html">Sales SOP Adherence Software</a>
-          <a href="./workflow_page.html">Automated Call Transcription</a>
-          <a href="./features_page.html">Speech Analytics &amp; Scoring</a>
-          <a href="./pricing_page.html">Pricing &amp; ROI Plans</a>
-          <a href="#faq">AI Sales Intelligence FAQ</a>
-          <a href="./about_page.html">About MysteryMentor</a>
-          <a href="./contact_page.html">Contact &amp; Book Demo</a>
+          <a href="./index.html">Home</a>
+          <a href="./platform_page.html">Platform</a>
+          <a href="./features_page.html">Features</a>
+          <a href="./workflow_page.html">Workflow</a>
+          <a href="./pricing_page.html">Pricing</a>
+          <a href="#faq">FAQ</a>
+          <a href="./about_page.html">About</a>
         </div>
         <div class="footer-col">
           <h4>Contact &amp; Verification</h4>

@@ -15,8 +15,8 @@
 
 #contact .footer-top {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 1.3fr 1.25fr 1.05fr 0.9fr;
+  gap: 40px;
   margin-bottom: 48px;
   padding-bottom: 0;
   border-bottom: none;
@@ -150,56 +150,36 @@
   font-size: 13px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px) and (min-width: 768px) {
   #contact .footer-top {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 500px) {
-  #contact .footer-top {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 36px 32px;
   }
 }
 
 @media (max-width: 767px) {
-  .mm-nav-links {
-    background: #3e3ea4;
-    backdrop-filter: none;
-    z-index: 10000;
-  }
-
-  .mm-nav .mm-nav-links a,
-  .mm-nav .mm-nav-links a.mm-active {
-    color: #fff;
-  }
-
-  .mm-nav .mm-nav-links a:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-  }
-
   #contact {
-    padding: 48px 5% 24px;
+    padding: 48px 5% 28px;
   }
 
   #contact .footer-top {
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: 28px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
     margin-bottom: 32px;
   }
 
   #contact .footer-brand,
+  #contact .footer-col,
   #contact .footer-cta-col {
-    grid-column: 1 / -1;
-    text-align: center;
-  }
-
-  #contact .footer-brand {
+    width: 100%;
     text-align: left;
   }
 
   #contact .footer-brand .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     width: max-content !important;
     max-width: 100%;
     margin: 0;
@@ -210,38 +190,84 @@
   }
 
   #contact .footer-brand p {
-    max-width: 280px;
+    max-width: 100%;
     margin: 12px 0 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #c7cadb;
+    text-align: left;
   }
 
-  #contact .footer-top > .footer-col:nth-of-type(3) {
-    padding-left: 6px;
+  #contact .footer-col h4,
+  #contact .footer-cta-col h4 {
+    margin-bottom: 14px;
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
   }
 
-  #contact .footer-col {
-    min-width: 0;
+  #contact .footer-col a {
+    display: block;
+    margin-bottom: 11px;
+    color: #c7cadb;
+    font-size: 14px;
+    line-height: 1.5;
+    text-decoration: none;
+    transition: color 0.2s;
+    text-align: left;
+  }
+
+  #contact .footer-col a:hover {
+    color: #ffffff;
+  }
+
+  #contact .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: #c7cadb;
+    font-size: 13.5px;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  #contact .contact-item svg {
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: #c7cadb;
+    stroke-width: 1.8;
   }
 
   #contact .contact-item a {
-    overflow-wrap: anywhere;
+    color: inherit;
+    text-decoration: none;
+    font-size: 13.5px;
   }
 
   #contact .contact-item a[href^="mailto:"] {
-    font-size: 11px;
+    font-size: 13.5px;
     white-space: nowrap;
   }
 
   #contact .contact-item:has(a[href^="tel:"]) {
     display: grid;
     grid-template-columns: 16px minmax(0, 1fr);
-    column-gap: 8px;
+    column-gap: 10px;
+    row-gap: 4px;
   }
 
   #contact .contact-item:has(a[href^="tel:"]) svg {
     grid-column: 1;
     grid-row: 1 / span 2;
     align-self: center;
-    transform: translateY(4px);
+    transform: translateY(2px);
   }
 
   #contact .contact-item:has(a[href^="tel:"]) br {
@@ -252,12 +278,30 @@
     grid-column: 2;
   }
 
-  #contact .footer-cta-col h4 {
-    margin-bottom: 12px !important;
+  #contact .footer-cta-col p {
+    margin-bottom: 14px;
+    color: #c7cadb;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
   }
 
   #contact .footer-demo-btn {
     display: inline-block;
+    padding: 11px 24px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  #contact .footer-bottom {
+    padding-top: 24px;
+    text-align: left;
   }
 }
 
