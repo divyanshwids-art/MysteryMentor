@@ -40,14 +40,18 @@
     }
 
     html {
-      scroll-behavior: smooth
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      max-width: 100%;
     }
 
     body {
       font-family: 'Inter', sans-serif;
       background: #4e4e9c;
       color: #e8e8f0;
-      overflow-x: hidden
+      overflow-x: hidden;
+      max-width: 100%;
+      position: relative;
     }
 
     /* NAV */
@@ -252,6 +256,22 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text
+    }
+
+    .hero-main-title {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #ffffff;
+      margin-bottom: 22px;
+    }
+
+    .hero-main-title .hero-title-line2 {
+      color: #93c5fd;
+    }
+
+    .hero-title-br {
+      display: block;
     }
 
     .hero-sub {
@@ -617,7 +637,8 @@
     /* HERO VIDEO SECTION */
     .hero-video-sec {
       padding: 44px 5% 28px;
-      background: #dbeafe
+      background: #dbeafe;
+      overflow: hidden;
     }
 
     .hero-video-inner {
@@ -2254,7 +2275,8 @@
       background: #3e3ea4;
       padding: 56px 5% 64px;
       margin-bottom: 0;
-      position: relative
+      position: relative;
+      overflow: hidden;
     }
 
     .cta-card {
@@ -2337,6 +2359,15 @@
       color: #fff;
       margin-bottom: 14px;
       line-height: 1.25
+    }
+
+    .cta-title-br {
+      display: none;
+    }
+
+    .cta-title-line1,
+    .cta-title-line2 {
+      display: inline;
     }
 
     .cta-inner p {
@@ -2573,15 +2604,6 @@
 
     @media(max-width:768px) {
       .nav-links {
-        display: none
-      }
-
-      .workflow-steps {
-        flex-wrap: wrap;
-        gap: 20px
-      }
-
-      .wf-arrow {
         display: none
       }
     }
@@ -2887,31 +2909,124 @@
         text-align: center;
       }
 
-      /* Workflow steps - wrap nicely */
-      .wf-step {
-        min-width: 140px;
-        max-width: none;
-        flex: 0 0 calc(50% - 10px);
-      }
-
-      .wf-arrow {
-        display: none;
-      }
-
-      .workflow-steps {
-        flex-wrap: wrap;
-        gap: 14px;
-      }
-
       /* Resp cards stacked already, just tweak */
       .resp-body {
         padding: 32px 18px 18px;
       }
     }
 
+    /* Desktop default for clone elements */
+    .wf-clone,
+    .wf-loop-arrow {
+      display: none !important;
+    }
+
+    /* ===== PHONE / MOBILE SPECIFIC ONLY (<= 768px) ===== */
+    @media(max-width: 768px) {
+      /* 1. Prevent left/right page scroll wobble */
+      html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+      }
+      section, footer, header, nav, main {
+        max-width: 100vw !important;
+        overflow-x: hidden;
+      }
+
+      /* 2. Hero title: Line 1 'Transform Sales Conversations', Line 2 'Into Actionable Intelligence' */
+      .hero-main-title {
+        font-size: clamp(1.05rem, 4.9vw, 1.6rem) !important;
+        line-height: 1.28 !important;
+        margin-bottom: 16px !important;
+      }
+      .hero-main-title .hero-title-line1,
+      .hero-main-title .hero-title-line2 {
+        display: inline-block !important;
+        white-space: nowrap !important;
+        max-width: 100% !important;
+      }
+
+      /* 3. 5-Step AI Pipeline continuous floating cards ticker (right to left, pause on hover/touch) */
+      .wf-clone {
+        display: list-item !important;
+      }
+      .wf-loop-arrow {
+        display: flex !important;
+      }
+      .workflow-sec {
+        overflow: hidden !important;
+      }
+      .workflow-sec .section-inner {
+        overflow: hidden !important;
+        max-width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .workflow-steps {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: visible !important;
+        width: max-content !important;
+        gap: 16px !important;
+        padding: 16px 0 !important;
+        animation: wfFloatMarquee 25s linear infinite !important;
+        touch-action: pan-y;
+      }
+      .workflow-steps:hover,
+      .workflow-steps:active,
+      .workflow-steps.is-paused {
+        animation-play-state: paused !important;
+      }
+      .wf-step {
+        flex: 0 0 280px !important;
+        width: 280px !important;
+        min-width: 280px !important;
+        max-width: 280px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        margin: 0 !important;
+      }
+      .wf-arrow {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 22px !important;
+        width: 22px !important;
+        opacity: 0.8 !important;
+        transform: none !important;
+        font-size: 20px;
+        color: #38bdf8;
+      }
+      @keyframes wfFloatMarquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* 4. CTA title: Exactly 2 lines on mobile phone */
+      .cta-title-br {
+        display: inline !important;
+      }
+      .cta-inner h2 {
+        font-size: clamp(1.15rem, 5vw, 1.55rem) !important;
+        line-height: 1.35 !important;
+      }
+      .cta-title-line1,
+      .cta-title-line2 {
+        display: inline-block !important;
+        white-space: nowrap !important;
+      }
+    }
+
     @media(max-width:380px) {
       .wf-step {
-        flex: 0 0 100%;
+        flex: 0 0 260px !important;
+        width: 260px !important;
+        min-width: 260px !important;
       }
 
       h1 {
@@ -3519,7 +3634,7 @@
     <div class="hero-grid">
       <div class="hero-content">
 
-        <h2 style="font-size: 2rem; font-weight: 700; line-height: 1.2;">Transform Sales Conversations <br> <span style="color: #93c5fd;">Into Actionable Intelligence</span></h2> <br>
+        <h2 class="hero-main-title"><span class="hero-title-line1">Transform Sales Conversations</span><br class="hero-title-br"><span class="hero-title-line2">Into Actionable Intelligence</span></h2>
         <p class="hero-sub">AI-powered sales intelligence platform that captures sales call audio, converts speech to text, maps conversation flow to industry-specific SOPs, and delivers objective quality scoring alongside real-time productivity insights for sales teams.</p>
 
         <!-- AEO Answer-First Definition Target (40-60 Words) -->
@@ -3627,9 +3742,7 @@
               </div>
             </div>
             <!-- GEO Statistical Proof & Methodology Citation -->
-            <div style="margin-top:14px;padding-top:10px;border-top:1px dashed rgba(255,255,255,0.14);font-size:11px;line-height:1.45;color:rgba(255,255,255,0.72);">
-              *Based on a 2025 cohort study of mid-market B2B teams using MysteryMentor: automated SOP scoring improved compliance from 54% to 92% within 90 days across 100% of sales calls.
-            </div>
+
           </div>
         </div>
       </div>
@@ -4240,8 +4353,8 @@
 
       <script>
         (function () {
-          var steps = document.querySelectorAll('.wf-step');
-          var arrows = document.querySelectorAll('.wf-arrow');
+          var steps = document.querySelectorAll('.wf-step:not(.wf-clone)');
+          var arrows = document.querySelectorAll('.wf-arrow:not(.wf-clone)');
 
           var animTimeout = [];
 
@@ -4266,19 +4379,56 @@
           }
 
           function animateWorkflow(entries) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                resetWorkflow();
-                runWorkflowAnim();
-              } else {
-                resetWorkflow();
-              }
-            });
+            if (window.innerWidth > 768) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  resetWorkflow();
+                  runWorkflowAnim();
+                } else {
+                  resetWorkflow();
+                }
+              });
+            }
           }
 
           var observer = new IntersectionObserver(animateWorkflow, { threshold: 0.25 });
           var section = document.querySelector('.workflow-steps');
           if (section) observer.observe(section);
+
+          // Mobile ticker: clone items for seamless right-to-left loop & pause on touch
+          function initMobileTicker() {
+            if (window.innerWidth <= 768 && section && !section.dataset.cloned) {
+              section.dataset.cloned = "true";
+              var lastEl = section.lastElementChild;
+              if (lastEl && !lastEl.classList.contains('wf-arrow')) {
+                var loopArrow = document.createElement('li');
+                loopArrow.className = 'wf-arrow wf-loop-arrow';
+                loopArrow.setAttribute('aria-hidden', 'true');
+                loopArrow.textContent = '→';
+                section.appendChild(loopArrow);
+              }
+              var items = Array.from(section.children);
+              items.forEach(function(item) {
+                var clone = item.cloneNode(true);
+                clone.classList.add('wf-clone');
+                clone.classList.add('visible');
+                section.appendChild(clone);
+              });
+            }
+          }
+          initMobileTicker();
+          window.addEventListener('resize', initMobileTicker);
+
+          if (section) {
+            section.addEventListener('touchstart', function() {
+              section.classList.add('is-paused');
+            }, { passive: true });
+            section.addEventListener('touchend', function() {
+              setTimeout(function() {
+                section.classList.remove('is-paused');
+              }, 1200);
+            }, { passive: true });
+          }
         })();
       </script>
     </div>
@@ -4542,7 +4692,7 @@
     <div class="cta-card">
       <div class="cta-inner">
         <div class="cta-left">
-          <h2>Ready to Bring Intelligence to Your Sales Conversations?</h2>
+          <h2><span class="cta-title-line1">Ready to Bring Intelligence</span><br class="cta-title-br"><span class="cta-title-line2">to Your Sales Conversations?</span></h2>
           <p>Join forward-thinking companies using AI to transform their sales training and quality assurance.</p>
         </div>
         <div class="cta-btns">
